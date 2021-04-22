@@ -1,4 +1,8 @@
-# color-the-tag-name
-This extension makes the element names colorful.
+# Color the tag name
+This extension will make your html tags colorful, just like my hair.  
 Vue, React Components are also OK.
-![preview](https://user-images.githubusercontent.com/26040158/115664916-7d199480-a37d-11eb-96cf-b342a38a79f0.png)
+# タグに色つけ太郎
+この拡張機能を使うと、HTMLのタグがカラフルになります。私の髪の毛のように。   
+VueやReactのコンポーネントでもOKです。
+
+![preview](https://user-images.githubusercontent.com/48117711/115729084-110c5000-a3c0-11eb-8240-5018013bdc8f.png)
