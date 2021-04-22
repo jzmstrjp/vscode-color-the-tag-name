@@ -63,7 +63,7 @@ const decorate = () => {
 		return;
 	}
 	const src = editor.document.getText();
-	const matches = src.match(/<(?:\/|)([a-zA-Z][a-zA-Z0-9-]*)(?:$|(?:| (?:.*?)[^-?%$])>)/gm) || [];
+	const matches = src.match(/<(?:\/|)([a-zA-Z][a-zA-Z0-9.-]*)(?:$|(?:| (?:.*?)[^-?%$])>)/gm) || [];
 	const tagNameLikeWords = matches.map((word) => word.replace(/[</>]|(?: .*$)/g, ''));
 	const uniqueTagNames = [...new Set(tagNameLikeWords)];
 	uniqueTagNames.forEach((tagName) => {
