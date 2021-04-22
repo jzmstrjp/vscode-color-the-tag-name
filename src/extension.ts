@@ -10,7 +10,7 @@ const decorateInner = (tagInfo: TagInfo, editor: vscode.TextEditor, src: string)
 	if (tagInfo.decChar !== undefined) {
 		tagInfo.decChar.decorator.dispose();
 	}
-	var regex = new RegExp(`${commentSetting.startRegExp || commentSetting.start}|${commentSetting.endRegExp || commentSetting.end}|<(?:/|)${tagInfo.tagName}(?:$|(?:| (?:.*?)[^-?%$])>)`, 'gm');
+	var regex = new RegExp(`${commentSetting.startRegExp || commentSetting.start}|${commentSetting.endRegExp || commentSetting.end}|<(?:/|)${tagInfo.tagName}(?:$|(?:| (?:.*?)[^-?%$])(?<!=)>)`, 'gm');
 	let match: RegExpExecArray | null;
 	var inComment = false;
 	tagInfo.decChar = {
@@ -63,7 +63,8 @@ const decorate = () => {
 		return;
 	}
 	const src = editor.document.getText();
-	const matches = src.match(/<(?:\/|)([a-zA-Z][a-zA-Z0-9.-]*)(?:$|(?:| (?:.*?)[^-?%$])>)/gm) || [];
+	const matches = src.match(/<(?:\/|)([a-zA-Z][a-zA-Z0-9.-]*)(?:$|(?:| (?:.*?)[^-?%$])(?<!=)>)/gm) || [];
+	console.log('matches:', matches);
 	const tagNameLikeWords = matches.map((word) => word.replace(/[</>]|(?: .*$)/g, ''));
 	const uniqueTagNames = [...new Set(tagNameLikeWords)];
 	uniqueTagNames.forEach((tagName) => {
