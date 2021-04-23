@@ -64,7 +64,6 @@ const decorate = () => {
 	}
 	const src = editor.document.getText();
 	const matches = src.match(/<(?:\/|)([a-zA-Z][a-zA-Z0-9.-]*)(?:$|(?:| (?:.*?)[^-?%$])(?<!=)>)/gm) || [];
-	console.log('matches:', matches);
 	const tagNameLikeWords = matches.map((word) => word.replace(/[</>]|(?: .*$)/g, ''));
 	const uniqueTagNames = [...new Set(tagNameLikeWords)];
 	uniqueTagNames.forEach((tagName) => {
@@ -72,10 +71,11 @@ const decorate = () => {
 		if (tagInfos.map(({ tagName }) => tagName).includes(tagName)) {
 			return;
 		}
+		const tagColor = colorMap[tagName] || colorEntries[tagName.length + (tagName.match(/[aiueo]/)?.length || 0)][1];
 		tagInfos.push({
 			decChar: undefined,
 			tagName,
-			tagColor: colorMap[tagName] || colorEntries[tagName.length][1],
+			tagColor,
 		});
 	});
 	tagInfos.forEach(function (tagInfo) {
