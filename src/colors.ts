@@ -32,7 +32,7 @@ export const colorMap: Record<string, string> = {
 	col: "#a4d5ff",
 	colgroup: "#acb5ff",
 	dd: "#dd9",
-	del: "#a8a8a8",
+	del: "#dcc",
 	dfn: "#bfa",
 	div: "rgb(206, 228, 231)",
 	dl: "#e93",
