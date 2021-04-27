@@ -71,7 +71,7 @@ const decorate = () => {
 		if (tagInfos.map(({ tagName }) => tagName).includes(tagName)) {
 			return;
 		}
-		const tagColor = colorMap[tagName] || colorEntries[tagName.length + (tagName.match(/[aiueo]/)?.length || 0)][1];
+		const tagColor = colorMap[tagName] || colorEntries[tagName.length + (tagName.match(/[aiueo]/g)?.length || 0)][1];
 		tagInfos.push({
 			decChar: undefined,
 			tagName,
