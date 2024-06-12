@@ -6,3 +6,7 @@ Vue, React Components are also OK.
 VueやReactのコンポーネントでもOKです。
 
 ![preview](https://user-images.githubusercontent.com/48117711/115729084-110c5000-a3c0-11eb-8240-5018013bdc8f.png)
+
+## Now supports light themes!
+
+![preview light theme](img/light-theme.png)
