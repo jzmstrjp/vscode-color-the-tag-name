@@ -8,8 +8,8 @@ let tagInfos: TagInfo[] = [];
 const isDarkTheme = (): boolean => {
     const config = vscode.workspace.getConfiguration('workbench');
     const theme = config.get<string>('colorTheme');
-    const darkThemes = ['Dark', 'dark', 'Black', 'black'];
-    return theme ? darkThemes.some(darkTheme => theme.includes(darkTheme)) : false;
+    const lightThemes = ['light'];
+    return theme ? !lightThemes.some(lightTheme => theme.toLowerCase().includes(lightTheme)) : true;
 };
 
 const clearDecorations = () => {
