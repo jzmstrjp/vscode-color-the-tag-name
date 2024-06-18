@@ -4,12 +4,11 @@ import { CommentSetting, commentSettingMap } from './commentSetting';
 
 let tagInfos: TagInfo[] = [];
 
-// 現在のテーマがダーク系かライト系かを判定する関数
-const isDarkTheme = (): boolean => {
-    const config = vscode.workspace.getConfiguration('workbench');
-    const theme = config.get<string>('colorTheme');
-    const lightThemes = ['light'];
-    return theme ? !lightThemes.some(lightTheme => theme.toLowerCase().includes(lightTheme)) : true;
+// 現在のテーマがライト系かを判定する関数
+const isLightTheme = (): boolean => {
+    const activeColorTheme = vscode.window.activeColorTheme.kind;
+    const lightThemes = [1, 4];
+    return lightThemes.includes(activeColorTheme);
 };
 
 const clearDecorations = () => {
@@ -83,7 +82,7 @@ const decorate = () => {
     const matches = src.match(/<(?:\/|)([a-zA-Z][a-zA-Z0-9.-]*)(?:$|(?:| (?:.*?)[^-?%$])(?<!=)>)/gm) || [];
     const tagNameLikeWords = matches.map((word) => word.replace(/[</>]|(?: .*$)/g, ''));
     const uniqueTagNames = [...new Set(tagNameLikeWords)];
-    const themeType = isDarkTheme() ? 'dark' : 'light'; // テーマの種類を取得
+    const themeType = isLightTheme() ? 'light' : 'dark'; // テーマの種類を取得
     uniqueTagNames.forEach((tagName) => {
         // まだないタグ名の分だけ追加。
         if (tagInfos.map(({ tagName }) => tagName).includes(tagName)) {
@@ -103,11 +102,9 @@ const decorate = () => {
 
 export function activate(context: vscode.ExtensionContext) {
     // テーマ変更を監視
-    vscode.workspace.onDidChangeConfiguration(event => {
-        if (event.affectsConfiguration('workbench.colorTheme')) {
-            clearDecorations(); // Clear existing decorations
-            decorate(); // Reapply decorations with the new theme
-        }
+    vscode.window.onDidChangeActiveColorTheme(() => {
+        clearDecorations(); // Clear existing decorations
+        decorate(); // Reapply decorations with the new theme
     });
 
     // エディタが変更された時にトリガー
