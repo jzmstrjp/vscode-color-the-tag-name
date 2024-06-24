@@ -78,6 +78,9 @@ const decorate = () => {
     if (editor === undefined) {
         return;
     }
+    if (editor.document.fileName.endsWith(".ts")) {
+        return;
+    }
     const src = editor.document.getText();
     const matches = src.match(/<(?:\/|)([a-zA-Z][a-zA-Z0-9.-]*)(?:$|(?:| (?:.*?)[^-?%$])(?<!=)>)/gm) || [];
     const tagNameLikeWords = matches.map((word) => word.replace(/[</>]|(?: .*$)/g, ''));
